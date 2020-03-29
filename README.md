@@ -11,18 +11,18 @@ GET http://webservice.postku.org/tugas4/rest.php
 ### Mengambil 1 data/post
 GET http://webservice.postku.org/tugas4/rest.php?id={id}
 #### value:
--id (int)
+##### id (int)
 
 ### Mengedit data/post
 POST http://webservice.postku.org/tugas4/rest.php?update
 #### value:
--id (int)
--title (string)
--size (string)
--dl (string)
--ss (string)
+##### id (int)
+##### title (string)
+##### size (string)
+##### dl (string)
+##### ss (string)
 
 ### Menghapus data/post
 POST http://webservice.postku.org/tugas4/rest.php?delete
 #### value:
--id (int)
+##### id (int)
