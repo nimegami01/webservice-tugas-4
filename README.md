@@ -5,24 +5,24 @@
 
 ## Dokumentasi API
 
-Mengambil semua data/post
+### Mengambil semua data/post
 GET http://webservice.postku.org/tugas4/rest.php
 
-Mengambil 1 data/post
+### Mengambil 1 data/post
 GET http://webservice.postku.org/tugas4/rest.php?id={id}
-value:
+#### value:
 -id (int)
 
-Mengedit data/post
+### Mengedit data/post
 POST http://webservice.postku.org/tugas4/rest.php?update
-value:
+#### value:
 -id (int)
 -title (string)
 -size (string)
 -dl (string)
 -ss (string)
 
-Menghapus data/post
+### Menghapus data/post
 POST http://webservice.postku.org/tugas4/rest.php?delete
-value:
+#### value:
 -id (int)
