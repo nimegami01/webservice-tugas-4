@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Game PPSSPP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="jquery.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+
+    <h1 class="text-center bg-dark text-light p-3" style="font-size:20px">Download Game PPSSPP</h1>
+
+    <div class="top-data text-center">
+
+        <div class="text-primary" data-toggle="modal" data-target="#how">Bagaimana Cara Menambahkan
+            ?</div>
+
+        <div class="notif"></div>
+
+        <div class="input-show m-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Url</span>
+                </div>
+                <input type="text" class="form-control url" placeholder="Url dari coolrom.com.au">
+            </div>
+            <button class="btn btn-primary proses">Proses <div style="display: none;"
+                    class="spinner-grow spinner-grow-sm spin" role="status"></div>
+            </button>
+            <div class="hehehe" style="display:none">
+                <h3 style="font-size:20px" class="mt-2 mb-3">Information</h3>
+                <input type="text" class="form-control title mb-2" placeholder="Title">
+                <input type="text" class="form-control size mb-2" placeholder="Filesize">
+                <input type="text" class="form-control linkdownload mb-2" placeholder="Link Download">
+                <input type="text" class="form-control ss mb-2" placeholder="Screenshot">
+                <button class="btn btn-success masukk">Insert Data <div style="display: none;"
+                        class="spinner-grow spinner-grow-sm spin" role="status"></div></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="show_data"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="how" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Tutorial Menambahkan Data.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Silahkan buka website <a
+                                href="https://coolrom.com.au/">Coolrom.com.au</a></li>
+                        <li class="list-group-item">Copy salah satu url dari postingan disana</li>
+                        <li class="list-group-item">Setelah selesai di copy, silahkan paste di kolom "URL" pada aplikasi
+                            ini.</li>
+                        <li class="list-group-item" style="word-break:break-all">Contoh url seperti berikut:
+                            <strong>https://coolrom.com.au/roms/psx/39719/Tekken_3.php</strong></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Data.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="id_">
+                    <div class="form-group"><input type="text" class="form-control title_"></div>
+                    <div class="form-group"><input type="text" class="form-control size_"></div>
+                    <div class="form-group"><input type="text" class="form-control ss_"></div>
+                    <div class="form-group"><input type="text" class="form-control download_"></div>
+                    <div class="notif_edit"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary edit_broh">Save Changes</button>
+                    <button type="button" class="btn btn-secondary okeh" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">Copyright Sativa Wahyu Priyanto (17.01.53.0052)</div>
+
+    <script type="text/javascript">
+
+        function show_data() {
+            $.ajax({
+                url: 'http://webservice.postku.org/tugas4/rest.php',
+                method: "GET",
+                dataType: 'JSON',
+                success: function (data) {
+                    var a = "";
+                    var urll = "";
+                    for (var i = 0; i < data.length; i++) {
+                        // data[i]['title']
+                        urll = "'"+data[i]['download']+"'";
+                        a += '<div style="overflow:hidden;margin-bottom:20px;border-radius:7px;border:1px solid #ddd;padding:10px" data-toggle="modal" data-target="#post_'+i+'"><div style="border-radius:50%;height:80px;width:80px;overflow:hidden;position:relative;float:left;margin-right:10px"><img style="right: 50%;top: 50%;-webkit-transform: translate(50%, -50%);-ms-transform: translate(50%, -50%);transform: translate(50%, -50%);position: absolute;min-width: 100%;min-height: 100%;width: auto;height: auto;max-width: 190%;max-height: 110%;" src="' +
+                            data[i]['ss'] +
+                            '"></div><h2 style="font-size:22px;margin-bottom:15px;">' + data[i]['title'] +
+                            '</h2><div class="btn btn-primary btn-sm">More</div></div>';
+
+                            a += '<div class="modal fade" id="post_'+i+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">'+data[i]['title']+'</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><img style="max-width:100%;height:auto;margin-bottom:10px;margin-left:auto;margin-right:auto;display:block;" src="'+data[i]['ss']+'"><ul><li><strong>Title:</strong> '+data[i]['title']+'</li><li><strong>Size:</strong> '+data[i]['size']+'</li></ul></div><div class="modal-footer"><button type="button" class="btn btn-secondary asuk" data-dismiss="modal">Close</button><div class="btn btn-danger" onclick="del('+data[i]['id']+')">Delete</div><div class="btn btn-info" data-toggle="modal" data-target="#edit" onclick="edit('+data[i]['id']+')">Edit</div><div onclick="open_link('+urll+')" class="btn btn-primary edit_hide">Download</div></div></div></div></div>';
+
+
+                    }
+                    $('.show_data').html(a);
+                },
+                error: function () {
+                    $('.show_data').html('<div class="alert-danger">Error saat mengambil data.</div>');
+                }
+            })
+        }
+
+        function open_link(url){
+            window.open(url, '_system');
+        }
+
+        function edit(id){
+            $('.asuk').click()[0];
+            $.ajax({
+                url: 'http://webservice.postku.org/tugas4/rest.php?id='+id,
+                method: 'GET',
+                dataType: 'JSON',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    $('.title_').val(data[0]['title']);
+                    $('.size_').val(data[0]['size']);
+                    $('.ss_').val(data[0]['ss']);
+                    $('.download_').val(data[0]['download']);
+                    $('.id_').val(data[0]['id']);
+
+                    $('.okeh').click(function(){
+                        show_data();
+                        $('.title_').val('');
+                        $('.size_').val('');
+                        $('.ss_').val('');
+                        $('.download_').val('');
+                    })
+
+                },
+                error: function () {
+                    alert('Error');
+                }
+            })
+        }
+
+        $('.edit_broh').click(function(){
+            var id = $('.id_').val();
+            var title = $('.title_').val();
+            var size = $('.size_').val();
+            var dl = $('.download_').val();
+            var ss = $('.ss_').val();
+            if (id && title && size && dl && ss) {
+                $.ajax({
+                    url: 'http://webservice.postku.org/tugas4/rest.php?update',
+                    dataType: 'JSON',
+                    method: "POST",
+                    data: {
+                        id: id,
+                        title: title,
+                        size: size,
+                        dl: dl,
+                        ss: ss
+                    },
+                    success: function (data) {
+                        if (data.status) {
+                            $('.notif_edit').html('<div class="alert-success">' + data.msg + '</div>');
+                        } else {
+                            $('.notif_edit').html('<div class="alert-danger">' + data.msg + '</div>');
+                        }
+
+                        $('.hehehe').slideUp();
+                        $('.title').val('');
+                        $('.size').val('');
+                        $('.linkdownload').val('');
+                        $('.ss').val('');
+                        $('.proses').removeClass('btn-danger');
+                        $('.proses').addClass('btn-primary');
+                        $('.proses').html('Proses <div style="display: none;" class="spinner-grow spinner-grow-sm spin" role="status">');
+
+                    },
+                    error: function () {
+                        $('.notif_edit').html('<div class="alert-danger">Error saat mengedit '+title+'.</div>');
+                    }
+                })
+            } else {
+                $('.notif_edit_'+id).html('<div class="alert-danger">Data tidak diisi semua.</div>');
+            }
+        })
+
+        function del(id){
+            $.ajax({
+                url: 'http://webservice.postku.org/tugas4/rest.php?delete',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function () {
+                    alert('Error');
+                }
+            })
+        }
+
+        show_data();
+
+        $('.masukk').click(function () {
+            $('.notif').html('');
+            var url = $('.url').val();
+            var title = $('.title').val();
+            var size = $('.size').val();
+            var dl = $('.linkdownload').val();
+            var ss = $('.ss').val();
+            if (url && title && size && dl && ss) {
+                $.ajax({
+                    url: 'http://webservice.postku.org/tugas4/rest.php?insert',
+                    dataType: 'JSON',
+                    method: "POST",
+                    data: {
+                        url: url,
+                        title: title,
+                        size: size,
+                        dl: dl,
+                        ss: ss
+                    },
+                    success: function (data) {
+                        if (data.status) {
+                            $('.notif').html('<div class="alert-success">' + data.msg + '</div>');
+                        } else {
+                            $('.notif').html('<div class="alert-danger">' + data.msg + '</div>');
+                        }
+                        $('.masukk .spin').hide();
+
+                        $('.hehehe').slideUp();
+                        $('.title').val('');
+                        $('.size').val('');
+                        $('.linkdownload').val('');
+                        $('.ss').val('');
+                        $('.proses').removeClass('btn-danger');
+                        $('.proses').addClass('btn-primary');
+                        $('.proses').html('Proses <div style="display: none;" class="spinner-grow spinner-grow-sm spin" role="status">');
+                        show_data();
+
+                    },
+                    error: function () {
+                        $('.notif').html(
+                            '<div class="alert-danger">Error saat melakukan ajax, silahkan cek URL lagi.</div>'
+                        );
+                        $('.masukk .spin').hide();
+                    },
+                    beforeSend: function () {
+                        $('.masukk .spin').show();
+                    }
+                })
+            } else {
+                $('.notif').html('<div class="alert-danger">Error, data tidak lengkap.</div>');
+            }
+        })
+
+        $('.proses').click(function () {
+            $('.notif').html('');
+            if ($(this).hasClass('btn-danger')) {
+                $('.hehehe').slideUp();
+                $('.title').val('');
+                $('.size').val('');
+                $('.linkdownload').val('');
+                $('.ss').val('');
+                $('.proses').removeClass('btn-danger');
+                $('.proses').addClass('btn-primary');
+                $('.proses').html('Proses <div style="display: none;" class="spinner-grow spinner-grow-sm spin" role="status">');
+            } else {
+                var url = $('.url').val();
+                var cek = url.match(/\/\/(.*)au\//i);
+
+                if (cek == null) {
+                    $('.notif').html('<div class="alert-danger">Isi url terlebih dahulu/url salah.</div>');
+                } else if (cek[1] == "coolrom.com.") {
+                    get_data(url);
+                } else {
+                    $('.notif').html('<div class="alert-danger">Isi url terlebih dahulu.</div>');
+                }
+            }
+        })
+
+        function get_data(url) {
+            $.ajax({
+                url: 'https://ppsspp.xyz/wp-content/themes/psp/inc/ppsspp.php?url=' + url,
+                dataType: 'JSON',
+                success: function (data) {
+                    $('.proses').text('Close');
+                    $('.proses').addClass('btn-danger');
+                    $('.proses').removeClass('btn-primary');
+                    $('.hehehe').slideToggle();
+                    $('.title').val(data.title);
+                    $('.size').val(data.size);
+                    $('.linkdownload').val(data.temp_link);
+                    $('.ss').val(data.ss[0]);
+                    $('.proses .spin').hide();
+                },
+                error: function () {
+                    $('.notif').html(
+                        '<div class="alert-danger">Error saat melakukan ajax.</div>'
+                    );
+                    $('.proses .spin').hide();
+                },
+                beforeSend: function () {
+                    $('.proses .spin').show();
+                }
+            })
+        }
+    </script>
+
+</body>
+
+</html>
